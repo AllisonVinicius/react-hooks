@@ -1,10 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PageTitle from "../../components/layout/PageTitle";
 import SectionTitle from "../../components/layout/SectionTitle";
 
 const UseRef = (props) => {
   const [state, setstate] = useState("");
   const count = useRef(0);
+
+  useEffect(() => {
+    count.current = count.current + 1;
+  }, [state]);
+
   return (
     <div className="UseRef">
       <PageTitle
@@ -17,7 +22,7 @@ const UseRef = (props) => {
         <div>
           <span className="text">Valor: </span>
           <span className="text">{state}[</span>
-          <span className="text red">Contatdors</span>
+          <span className="text red">{count.current}</span>
           <span className="text">]</span>
         </div>
 
@@ -25,7 +30,7 @@ const UseRef = (props) => {
           type="text"
           className="input"
           value={state}
-          onChane={(e) => setstate(e.target.value)}
+          onChange={(e) => setstate(e.target.value)}
         />
       </div>
     </div>
